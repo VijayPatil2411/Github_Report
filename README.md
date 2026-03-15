@@ -30,22 +30,6 @@ The API:
 3. Aggregates the contributor data
 4. Returns a JSON report showing which users contribute to which repositories
 
----
-
-
---------------------------------------------------------------------------------------------------------------------------------
-
-🛠 Tech Stack
-
-Java 17
-
-Spring Boot
-
-Maven
-
-GitHub REST API
-
-Docker
 
 ------------------------------------------------------------------------------
 
@@ -144,5 +128,18 @@ https://github-report.onrender.com/api/access-report?org=github
 The org parameter represents the GitHub organization name.
 
 
------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
+
+🛠 Tech Stack
+
+Java 17
+
+Spring Boot
+
+Maven
+
+GitHub REST API
+
+Docker
+
 
