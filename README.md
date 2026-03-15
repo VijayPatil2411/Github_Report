@@ -80,6 +80,8 @@ Example request:
 ------------------------------------------------------------------------------
 
 📂 Project Structure
+
+
 src/main/java/com/github/report
 │
 ├── controller
