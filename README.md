@@ -1,6 +1,8 @@
 🌐 Live API (Test Directly)
+
 This Task is deployed on render
 You can test the deployed API directly in your browser.
+
 
 live link 1:
 
@@ -11,6 +13,10 @@ live link 2:
 https://github-report.onrender.com/api/access-report?org=github
 
 These endpoints will return a JSON report showing GitHub users and the repositories they contribute to within the specified organization.
+
+Note : Due to inactivity server may take 2-5 minutes to rebuild please wait till render rebuilds and then you can test API.
+
+------------------------------------------------------------------------------------------------------------------------------------------------
 
 📥 Providing Input via Query Parameter
 
@@ -28,10 +34,8 @@ https://github-report.onrender.com/api/access-report?org=github
 
 The org parameter represents the GitHub organization name.
 
-🖼 Screenshot: Passing Organization as Query Parameter
 
-
-
+-----------------------------------------------------------------------------------------------------------------------------------------
 📌 Project Overview
 
 This project is a Spring Boot REST API that generates a report of GitHub users and the repositories they contribute to within a given organization.
@@ -45,6 +49,9 @@ Retrieve contributors for each repository.
 Aggregate contributor data.
 
 Return a structured report showing which user contributes to which repositories.
+
+
+--------------------------------------------------------------------------------------------------------------------------------
 
 🛠 Tech Stack
 
@@ -157,16 +164,13 @@ https://github-report.onrender.com
 
 GitHub Personal Access Token is stored securely using environment variables and is not exposed in the source code.
 
+
+-------------------------------------------------------------------------------------------------------------------
+
 📄 Assignment Context
 
 This project was developed as part of a Java Developer Internship Assignment to demonstrate:
 
-API design
 
-GitHub API integration
-
-clean architecture
-
-cloud deployment
 
 
