@@ -113,10 +113,15 @@ https://github-report.onrender.com/api/access-report?org=github
 # Assumptions and Design Decisions
 
 • Only public repositories of the organization are considered
+
 • GitHub Contributors API is used to determine repository contributors
+
 • A user contributing to multiple repositories is grouped under the same user
+
 • Authentication is handled using a GitHub Personal Access Token
+
 • The project focuses on backend API functionality and does not include a frontend
+
 • Input is provided using query parameters
 
 --------------------------------------------------------------------------------------------------------------
