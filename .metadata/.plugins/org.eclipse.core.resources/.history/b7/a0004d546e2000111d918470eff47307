@@ -1,0 +1,5 @@
+package com.github.report.model;
+
+public class User {
+
+}
