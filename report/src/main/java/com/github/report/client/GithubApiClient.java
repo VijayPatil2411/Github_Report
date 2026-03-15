@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -20,15 +21,17 @@ public class GithubApiClient {
 
 private static final String GITHUB_API = "https://api.github.com";
 
-// Paste your github token here
-private static final String TOKEN = "YOUR_GITHUB_TOKEN";
+@Value("${github.token}")
+private String token;
 
 private RestTemplate restTemplate = new RestTemplate();
 
 private HttpHeaders getHeaders() {
+
     HttpHeaders headers = new HttpHeaders();
-    headers.set("Authorization", "Bearer " + TOKEN);
+    headers.set("Authorization", "Bearer " + token);
     headers.set("Accept", "application/vnd.github+json");
+
     return headers;
 }
 
@@ -50,6 +53,7 @@ public List<Repository> getRepositories(String org) {
         return Arrays.asList(response.getBody());
 
     } catch (Exception e) {
+
         System.out.println("Error fetching repositories: " + e.getMessage());
         return Collections.emptyList();
     }
@@ -73,10 +77,10 @@ public List<User> getCollaborators(String org, String repo) {
         return Arrays.asList(response.getBody());
 
     } catch (Exception e) {
+
         System.out.println("Error fetching contributors: " + e.getMessage());
         return Collections.emptyList();
     }
 }
-
 
 }
