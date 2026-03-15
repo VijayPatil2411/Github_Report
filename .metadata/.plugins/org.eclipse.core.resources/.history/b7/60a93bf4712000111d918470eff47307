@@ -1,0 +1,5 @@
+package com.github.report.controller;
+
+public class AccessReportController {
+
+}
