@@ -18,37 +18,19 @@ Note : Due to inactivity server may take 2-5 minutes to rebuild please wait till
 
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
-📥 Providing Input via Query Parameter
 
-This application does not include a frontend interface.
-The input is provided directly through the URL query parameter.
+# Project Overview
 
+This project is a **Spring Boot REST API** that generates a report of GitHub users and the repositories they contribute to within a specified GitHub organization.
 
-Format:
+The API:
 
-/api/access-report?org=<github-organization-name>
+1. Fetches all repositories of a GitHub organization
+2. Retrieves contributors for each repository
+3. Aggregates the contributor data
+4. Returns a JSON report showing which users contribute to which repositories
 
-Example:
-
-https://github-report.onrender.com/api/access-report?org=github
-
-The org parameter represents the GitHub organization name.
-
-
------------------------------------------------------------------------------------------------------------------------------------------
-📌 Project Overview
-
-This project is a Spring Boot REST API that generates a report of GitHub users and the repositories they contribute to within a given organization.
-
-The application performs the following steps:
-
-Fetch all repositories of a GitHub organization.
-
-Retrieve contributors for each repository.
-
-Aggregate contributor data.
-
-Return a structured report showing which user contributes to which repositories.
+---
 
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -64,18 +46,6 @@ Maven
 GitHub REST API
 
 Docker
-
-Render (Cloud Deployment)
-
-🔗 API Endpoint
-GET /api/access-report
-Query Parameter
-Parameter	Description
-org	GitHub organization name
-
-Example request:
-
-/api/access-report?org=github
 
 ------------------------------------------------------------------------------
 
@@ -99,80 +69,75 @@ src/main/java/com/github/report
 │
 └── ReportApplication.java
 
------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+# How Authentication is Configured
 
-⚙ How It Works
+GitHub API requires authentication to avoid strict rate limits.
 
-1️⃣ User sends request:
+Authentication is configured using a **GitHub Personal Access Token** stored as an environment variable.
 
-/api/access-report?org=<organization>
+application.properties
 
-2️⃣ Controller receives the request.
+github.token=${GITHUB_TOKEN}
 
-3️⃣ Service layer processes the business logic.
+The token is injected into the application using Spring:
 
-4️⃣ GitHub API Client fetches data from GitHub APIs:
+@Value("${github.token}")
 
-https://api.github.com/orgs/{org}/repos
+and added to API requests using:
 
-and
+Authorization: Bearer <token>
 
-https://api.github.com/repos/{org}/{repo}/contributors
+--------------------------------------------------------------------------------------------------------------
 
-5️⃣ The data is aggregated and returned as a JSON response.
+# How to Call the API Endpoint
 
--------------------------------------------------------------------------
+Endpoint:
 
-🖥 Running Locally
+GET /api/access-report
 
-Clone the repository:
+Query Parameter:
 
-git clone https://github.com/VijayPatil2411/Github_Report.git
+org → GitHub organization name
 
-Navigate into the project directory:
+Example:
 
-cd Github_Report
+/api/access-report?org=github
 
-Run the application:
+Example full request:
 
-mvn spring-boot:run
+https://github-report.onrender.com/api/access-report?org=github
 
------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
 
-Test locally:
+# Assumptions and Design Decisions
 
-http://localhost:8080/api/access-report?org=spring-projects
-🐳 Docker Support
+• Only public repositories of the organization are considered
+• GitHub Contributors API is used to determine repository contributors
+• A user contributing to multiple repositories is grouped under the same user
+• Authentication is handled using a GitHub Personal Access Token
+• The project focuses on backend API functionality and does not include a frontend
+• Input is provided using query parameters
 
-Build Docker image:
-
-docker build -t github-report .
-
-Run container:
-
-docker run -p 8080:8080 github-report
-☁ Deployment
-
-The application is deployed using:
-
-Docker
-
-Render Cloud Platform
-
-Live deployment:
-
-https://github-report.onrender.com
-🔐 Security Note
-
-GitHub Personal Access Token is stored securely using environment variables and is not exposed in the source code.
+--------------------------------------------------------------------------------------------------------------
 
 
--------------------------------------------------------------------------------------------------------------------
+📥 Providing Input via Query Parameter
 
-📄 Assignment Context
-
-This project was developed as part of a Java Developer Internship Assignment to demonstrate:
-
+This application does not include a frontend interface.
+The input is provided directly through the URL query parameter.
 
 
+Format:
+
+/api/access-report?org=<github-organization-name>
+
+Example:
+
+https://github-report.onrender.com/api/access-report?org=github
+
+The org parameter represents the GitHub organization name.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------
 
