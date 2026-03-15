@@ -16,42 +16,6 @@ These endpoints will return a JSON report showing GitHub users and the repositor
 
 Note : Due to inactivity server may take 2-5 minutes to rebuild please wait till render rebuilds and then you can test API.
 
-------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-# Project Overview
-
-This project is a **Spring Boot REST API** that generates a report of GitHub users and the repositories they contribute to within a specified GitHub organization.
-
-The API:
-
-1. Fetches all repositories of a GitHub organization
-2. Retrieves contributors for each repository
-3. Aggregates the contributor data
-4. Returns a JSON report showing which users contribute to which repositories
-
-
-------------------------------------------------------------------------------
-
-📂 Project Structure
-
-
-src/main/java/com/github/report
-│
-├── controller
-│   └── AccessReportController.java
-│
-├── service
-│   └── GithubService.java
-│
-├── client
-│   └── GithubApiClient.java
-│
-├── model
-│   ├── Repository.java
-│   └── User.java
-│
-└── ReportApplication.java
 
 ----------------------------------------------------------------------------------------------------------------
 # How Authentication is Configured
@@ -107,6 +71,43 @@ https://github-report.onrender.com/api/access-report?org=github
 • The project focuses on backend API functionality and does not include a frontend
 
 • Input is provided using query parameters
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# Project Overview
+
+This project is a **Spring Boot REST API** that generates a report of GitHub users and the repositories they contribute to within a specified GitHub organization.
+
+The API:
+
+1. Fetches all repositories of a GitHub organization
+2. Retrieves contributors for each repository
+3. Aggregates the contributor data
+4. Returns a JSON report showing which users contribute to which repositories
+
+
+------------------------------------------------------------------------------
+
+📂 Project Structure
+
+
+src/main/java/com/github/report
+│
+├── controller
+│   └── AccessReportController.java
+│
+├── service
+│   └── GithubService.java
+│
+├── client
+│   └── GithubApiClient.java
+│
+├── model
+│   ├── Repository.java
+│   └── User.java
+│
+└── ReportApplication.java
+
 
 --------------------------------------------------------------------------------------------------------------
 
