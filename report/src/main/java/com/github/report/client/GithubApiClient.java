@@ -19,7 +19,7 @@ public class GithubApiClient {
     private static final String GITHUB_API = "https://api.github.com";
 
     // Replace with your GitHub Personal Access Token
-    private static final String TOKEN = "YOUR_GITHUB_TOKEN";
+    private static final String TOKEN = "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";
 
     private RestTemplate restTemplate = new RestTemplate();
 

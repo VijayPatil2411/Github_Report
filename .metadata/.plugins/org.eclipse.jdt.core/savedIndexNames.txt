@@ -16,7 +16,6 @@ INDEX VERSION 1.134+C:\Users\Admin\Desktop\assignment\.metadata\.plugins\org.ecl
 2296894433.index
 922319437.index
 1687123099.index
-217352858.index
 3993647698.index
 3200775753.index
 4166128435.index

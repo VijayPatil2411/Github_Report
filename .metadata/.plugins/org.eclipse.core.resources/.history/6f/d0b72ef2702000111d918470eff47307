@@ -1,0 +1,5 @@
+package com.github.report.service;
+
+public class GithubService {
+
+}
