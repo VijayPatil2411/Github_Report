@@ -1,0 +1,82 @@
+package com.github.report.client;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+
+import com.github.report.model.Repository;
+import com.github.report.model.User;
+
+@Component
+public class GithubApiClient {
+
+
+private static final String GITHUB_API = "https://api.github.com";
+
+// 🔴 Paste your token here
+private static final String TOKEN = "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";
+
+private RestTemplate restTemplate = new RestTemplate();
+
+private HttpHeaders getHeaders() {
+    HttpHeaders headers = new HttpHeaders();
+    headers.set("Authorization", "Bearer " + TOKEN);
+    headers.set("Accept", "application/vnd.github+json");
+    return headers;
+}
+
+public List<Repository> getRepositories(String org) {
+
+    try {
+
+        String url = GITHUB_API + "/orgs/" + org + "/repos";
+
+        HttpEntity<String> entity = new HttpEntity<>(getHeaders());
+
+        ResponseEntity<Repository[]> response =
+                restTemplate.exchange(url, HttpMethod.GET, entity, Repository[].class);
+
+        if (response.getBody() == null) {
+            return Collections.emptyList();
+        }
+
+        return Arrays.asList(response.getBody());
+
+    } catch (Exception e) {
+        System.out.println("Error fetching repositories: " + e.getMessage());
+        return Collections.emptyList();
+    }
+}
+
+public List<User> getCollaborators(String org, String repo) {
+
+    try {
+
+        String url = GITHUB_API + "/repos/" + org + "/" + repo + "/contributors";
+
+        HttpEntity<String> entity = new HttpEntity<>(getHeaders());
+
+        ResponseEntity<User[]> response =
+                restTemplate.exchange(url, HttpMethod.GET, entity, User[].class);
+
+        if (response.getBody() == null) {
+            return Collections.emptyList();
+        }
+
+        return Arrays.asList(response.getBody());
+
+    } catch (Exception e) {
+        System.out.println("Error fetching contributors: " + e.getMessage());
+        return Collections.emptyList();
+    }
+}
+
+
+}

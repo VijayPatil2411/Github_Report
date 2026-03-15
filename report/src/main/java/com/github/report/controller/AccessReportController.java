@@ -1,5 +1,6 @@
 package com.github.report.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,9 +20,27 @@ public class AccessReportController {
     }
 
     @GetMapping("/api/access-report")
-    public Map<String, List<String>> getAccessReport(
-            @RequestParam String org) {
+    public List<UserAccessReport> getAccessReport(@RequestParam String org) {
 
-        return githubService.generateAccessReport(org);
+        Map<String, List<String>> accessMap = githubService.generateAccessReport(org);
+
+        List<UserAccessReport> result = new ArrayList<>();
+
+        for (Map.Entry<String, List<String>> entry : accessMap.entrySet()) {
+            result.add(new UserAccessReport(entry.getKey(), entry.getValue()));
+        }
+
+        return result;
+    }
+
+    static class UserAccessReport {
+
+        public String user;
+        public List<String> repositories;
+
+        public UserAccessReport(String user, List<String> repositories) {
+            this.user = user;
+            this.repositories = repositories;
+        }
     }
 }

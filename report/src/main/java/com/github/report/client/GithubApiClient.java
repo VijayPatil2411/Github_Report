@@ -17,61 +17,66 @@ import com.github.report.model.User;
 @Component
 public class GithubApiClient {
 
-    private static final String GITHUB_API = "https://api.github.com";
 
-    // Put your NEW GitHub token here
-    private static final String TOKEN = "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";
+private static final String GITHUB_API = "https://api.github.com";
 
-    private RestTemplate restTemplate = new RestTemplate();
+// Paste your github token here
+private static final String TOKEN = "YOUR_GITHUB_TOKEN";
 
-    private HttpHeaders getHeaders() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "token " + TOKEN);
-        headers.set("Accept", "application/vnd.github+json");
-        return headers;
-    }
+private RestTemplate restTemplate = new RestTemplate();
 
-    public List<Repository> getRepositories(String org) {
+private HttpHeaders getHeaders() {
+    HttpHeaders headers = new HttpHeaders();
+    headers.set("Authorization", "Bearer " + TOKEN);
+    headers.set("Accept", "application/vnd.github+json");
+    return headers;
+}
 
-        try {
-            String url = GITHUB_API + "/orgs/" + org + "/repos";
+public List<Repository> getRepositories(String org) {
 
-            HttpEntity<String> entity = new HttpEntity<>(getHeaders());
+    try {
 
-            ResponseEntity<Repository[]> response =
-                    restTemplate.exchange(url, HttpMethod.GET, entity, Repository[].class);
+        String url = GITHUB_API + "/orgs/" + org + "/repos";
 
-            if (response.getBody() == null) {
-                return Collections.emptyList();
-            }
+        HttpEntity<String> entity = new HttpEntity<>(getHeaders());
 
-            return Arrays.asList(response.getBody());
+        ResponseEntity<Repository[]> response =
+                restTemplate.exchange(url, HttpMethod.GET, entity, Repository[].class);
 
-        } catch (Exception e) {
-            System.out.println("Error fetching repositories: " + e.getMessage());
+        if (response.getBody() == null) {
             return Collections.emptyList();
         }
+
+        return Arrays.asList(response.getBody());
+
+    } catch (Exception e) {
+        System.out.println("Error fetching repositories: " + e.getMessage());
+        return Collections.emptyList();
     }
+}
 
-    public List<User> getCollaborators(String org, String repo) {
+public List<User> getCollaborators(String org, String repo) {
 
-        try {
-            String url = GITHUB_API + "/repos/" + org + "/" + repo + "/contributors";
+    try {
 
-            HttpEntity<String> entity = new HttpEntity<>(getHeaders());
+        String url = GITHUB_API + "/repos/" + org + "/" + repo + "/contributors";
 
-            ResponseEntity<User[]> response =
-                    restTemplate.exchange(url, HttpMethod.GET, entity, User[].class);
+        HttpEntity<String> entity = new HttpEntity<>(getHeaders());
 
-            if (response.getBody() == null) {
-                return Collections.emptyList();
-            }
+        ResponseEntity<User[]> response =
+                restTemplate.exchange(url, HttpMethod.GET, entity, User[].class);
 
-            return Arrays.asList(response.getBody());
-
-        } catch (Exception e) {
-            System.out.println("Error fetching contributors for repo: " + repo);
+        if (response.getBody() == null) {
             return Collections.emptyList();
         }
+
+        return Arrays.asList(response.getBody());
+
+    } catch (Exception e) {
+        System.out.println("Error fetching contributors: " + e.getMessage());
+        return Collections.emptyList();
     }
+}
+
+
 }
